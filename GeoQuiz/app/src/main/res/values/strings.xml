@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
+    <string name="questin_text">
+        Constantinopole is the largest city in Turkey?
+    </string>
+    <string name="true_button">TRUE</string>
+    <string name="false_button">FALSE</string>
 </resources>

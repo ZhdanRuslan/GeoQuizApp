@@ -22,10 +22,10 @@
 
         <TextView
             android:text="Constantinopole is the largest city in Turkey?"
-            android:layout_width="366dp"
+            android:layout_width="match_parent"
+            android:padding="24dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:layout_weight="0.05" />
+            android:id="@+id/textView2" />
 
         <LinearLayout
             android:orientation="horizontal"

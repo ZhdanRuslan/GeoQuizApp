@@ -36,14 +36,14 @@
                 android:text="TRUE"
                 android:layout_width="185dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
+                android:id="@+id/true_button"
                 android:elevation="7dp" />
 
             <Button
                 android:text="FALSE"
                 android:layout_width="169dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
+                android:id="@+id/false_button"
                 android:elevation="7dp" />
         </LinearLayout>
     </LinearLayout>

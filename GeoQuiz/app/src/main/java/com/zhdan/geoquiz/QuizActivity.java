@@ -13,6 +13,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
+    private Button mCheatButton;
+
     private ImageButton mNextButton;
     private ImageButton mPrevButton;
 
@@ -101,6 +103,15 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
+//***
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//               Some activity
+            }
+        });
+
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
         updateQuestion();

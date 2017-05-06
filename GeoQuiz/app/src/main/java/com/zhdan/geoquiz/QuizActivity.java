@@ -1,5 +1,6 @@
 package com.zhdan.geoquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -103,12 +104,13 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
-//***
+
         mCheatButton = (Button) findViewById(R.id.cheat_button);
-        mPrevButton.setOnClickListener(new View.OnClickListener() {
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//               Some activity
+                Intent i = new Intent(QuizActivity.this, CheatActivity.class);
+                startActivity(i);
             }
         });
 

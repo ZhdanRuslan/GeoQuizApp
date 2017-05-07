@@ -48,7 +48,7 @@ public class QuizActivity extends AppCompatActivity {
 
         int messageResId = 0;
 
-        if (mIsCheater){
+        if (mIsCheater) {
             messageResId = R.string.judgement_toast;
         } else {
             if (userPressedTrue == answerIsTrue) {
@@ -66,6 +66,9 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "OnCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
+
+        if (savedInstanceState != null)
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
@@ -123,8 +126,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState != null)
-            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
         updateQuestion();
     }
 
@@ -146,7 +147,6 @@ public class QuizActivity extends AppCompatActivity {
             }
             mIsCheater = CheatActivity.wasAnswerShown(data);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

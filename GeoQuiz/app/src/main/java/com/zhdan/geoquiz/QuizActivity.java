@@ -49,7 +49,7 @@ public class QuizActivity extends AppCompatActivity {
         int messageResId = 0;
 
         if (mIsCheater) {
-            messageResId = R.string.judgement_toast;
+            messageResId = R.string.judgment_toast;
         } else {
             if (userPressedTrue == answerIsTrue) {
                 messageResId = R.string.correct_toast;
@@ -57,6 +57,7 @@ public class QuizActivity extends AppCompatActivity {
                 messageResId = R.string.incorrect_toast;
             }
         }
+
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 
@@ -138,7 +139,7 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != Activity.RESULT_OK) {
+        if (resultCode != Activity.RESULT_OK) {
             return;
         }
         if (requestCode == REQUEST_CODE_CHEAT) {

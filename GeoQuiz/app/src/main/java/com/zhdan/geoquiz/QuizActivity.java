@@ -1,5 +1,6 @@
 package com.zhdan.geoquiz;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,9 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
     private static final int REQUEST_CODE_CHEAT = 0;
 
+    private int mCurrentIndex = 0;
+    private boolean mIsCheater;
+
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_oceans, true),
             new Question(R.string.question_mideast, false),
@@ -32,8 +36,6 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_americas, true),
             new Question(R.string.question_asia, true),
     };
-
-    private int mCurrentIndex = 0;
 
     private void updateQuestion() {
         Log.d(TAG, "Updating question text for question# " + mCurrentIndex, new Exception());
@@ -126,6 +128,20 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState");
         outState.putInt(KEY_INDEX, mCurrentIndex);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE_CHEAT) {
+            if (data == null) {
+                return;
+            }
+            mIsCheater = CheatActivity.wasAnswerShown(data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashSet;
+
 public class QuizActivity extends AppCompatActivity {
 
     private Button mTrueButton;
@@ -27,6 +29,8 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_STATE = "state";
     private static final int REQUEST_CODE_CHEAT = 0;
 
+    private static HashSet wasCheat = new HashSet();
+
     private int mCurrentIndex = 0;
     private boolean mIsCheater;
 
@@ -41,6 +45,7 @@ public class QuizActivity extends AppCompatActivity {
     private void updateQuestion() {
         Log.d(TAG, "Updating question text for question# " + mCurrentIndex, new Exception());
         int question = mQuestionBank[mCurrentIndex].getTextResId();
+
         mQuestionTextView.setText(question);
     }
 
@@ -49,7 +54,8 @@ public class QuizActivity extends AppCompatActivity {
 
         int messageResId = 0;
 
-        if (mIsCheater) {
+//        if (mIsCheater) {
+        if (wasCheat.contains(mCurrentIndex)) {
             messageResId = R.string.judgment_toast;
         } else {
             if (userPressedTrue == answerIsTrue) {
@@ -105,6 +111,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 mIsCheater = false;
+
                 updateQuestion();
             }
         });
@@ -151,6 +158,9 @@ public class QuizActivity extends AppCompatActivity {
                 return;
             }
             mIsCheater = CheatActivity.wasAnswerShown(data);
+            if (mIsCheater){
+                wasCheat.add(mCurrentIndex);
+            }
         }
     }
 

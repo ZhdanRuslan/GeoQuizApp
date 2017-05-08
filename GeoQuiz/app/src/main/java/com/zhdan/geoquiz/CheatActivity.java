@@ -12,6 +12,7 @@ public class CheatActivity extends AppCompatActivity {
 
     private static final String EXTRA_ANSWER_IS_TRUE = "com.zhdan.geoquiz.answer_is_true";
     private static final String EXTRA_ANSWER_SHOWN = "com.zhdan.geoquiz.answer_shown";
+    private static final String KEY_STATE = "state";
 
     private boolean mAnswerIsTrue;
 
@@ -36,6 +37,11 @@ public class CheatActivity extends AppCompatActivity {
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
+        if (savedInstanceState != null) {
+            mAnswerIsTrue = savedInstanceState.getBoolean(KEY_STATE, false);
+            setAnswerShownResult(mAnswerIsTrue);
+        }
+
         mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
 
         mShowAnswer = (Button) findViewById(R.id.show_answer_button);
@@ -56,5 +62,11 @@ public class CheatActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
         setResult(RESULT_OK, data);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_STATE, mAnswerIsTrue);
     }
 }

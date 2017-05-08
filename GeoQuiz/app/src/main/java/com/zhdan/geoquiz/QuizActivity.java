@@ -24,6 +24,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
+//    private static final String KEY_STATE = "state";
     private static final int REQUEST_CODE_CHEAT = 0;
 
     private int mCurrentIndex = 0;
@@ -68,8 +69,10 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG, "OnCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
 
-        if (savedInstanceState != null)
+        if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+//            mIsCheater = savedInstanceState.getBoolean(KEY_STATE, false);
+        }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +138,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState");
         outState.putInt(KEY_INDEX, mCurrentIndex);
+//        outState.putBoolean(KEY_STATE, mIsCheater);
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,12 +11,6 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 
 public class CheatActivity extends AppCompatActivity {
 
@@ -30,12 +23,6 @@ public class CheatActivity extends AppCompatActivity {
     private TextView mAnswerTextView;
     private TextView mApiTextView;
     private Button mShowAnswer;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
 
     public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
         Intent i = new Intent(packageContext, CheatActivity.class);
@@ -61,16 +48,15 @@ public class CheatActivity extends AppCompatActivity {
 
         mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
 
-
         mShowAnswer = (Button) findViewById(R.id.show_answer_button);
+
+        mApiTextView = (TextView) findViewById(R.id.api_text_view);
+        String version = "API level " + String.valueOf(Build.VERSION.SDK_INT);
+        mApiTextView.setText(version);
 
         mShowAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                mApiTextView = (TextView) findViewById(R.id.api_text_view);
-                String version = "API level " + String.valueOf(Build.VERSION.SDK_INT);
-                mApiTextView.setText(version);
 
                 if (mAnswerIsTrue) {
                     mAnswerTextView.setText(R.string.true_button);
@@ -100,9 +86,6 @@ public class CheatActivity extends AppCompatActivity {
                 }
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void setAnswerShownResult(boolean isAnswerShown) {
@@ -115,41 +98,5 @@ public class CheatActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_STATE, mAnswerIsTrue);
-    }
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Cheat Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
     }
 }

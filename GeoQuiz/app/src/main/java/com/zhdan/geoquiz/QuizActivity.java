@@ -54,7 +54,6 @@ public class QuizActivity extends AppCompatActivity {
 
         int messageResId = 0;
 
-//        if (mIsCheater) {
         if (wasCheat.contains(mCurrentIndex)) {
             messageResId = R.string.judgment_toast;
         } else {
